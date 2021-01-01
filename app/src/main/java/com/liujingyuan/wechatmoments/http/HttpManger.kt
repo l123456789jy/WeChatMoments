@@ -28,7 +28,7 @@ object HttpManger {
         var logging = HttpLoggingInterceptor(HttpLoggingInterceptor.Logger {
             Log.e(TAG, it)
         })
-        logging.setLevel(HttpLoggingInterceptor.Level.BASIC);
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
         val okHttpClientBuilder = OkHttpClient.Builder()
             .connectTimeout(timeout.toLong(), TimeUnit.SECONDS)
             .readTimeout(timeout.toLong(), TimeUnit.SECONDS)
@@ -43,16 +43,17 @@ object HttpManger {
     val retrofit: Retrofit = Retrofit.Builder()
         .client(client)
         .baseUrl(BASE_URL)
-        .addConverterFactory(GsonConverterFactory.create())
         .addCallAdapterFactory(LiveDataCallAdapterFactory())
+        .addConverterFactory(GsonConverterFactory.create())
         .build()
 
     private val api: AppApi by lazy { createService(AppApi::class.java) }
 
-    val httpApi: AppApi
+   open val httpApi: AppApi
         get() = api
 
     private fun <T> createService(serviceClass: Class<T>): T {
         return retrofit.create(serviceClass)
     }
+
 }

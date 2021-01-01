@@ -30,9 +30,9 @@ open class BaseViewModel : ViewModel() {
         MutableLiveData<Pair<Boolean, Int>>()
     }
     /**
-     *显示 SwipeRefreshLayout
+     *触发刷新
      */
-    val showRefreshIcon: MutableLiveData<Boolean> by lazy { MutableLiveData<Boolean>() }
+    val RefreshData: MutableLiveData<Boolean> by lazy { MutableLiveData<Boolean>() }
     /**
      *  没有错误或者中断
      */
@@ -79,7 +79,7 @@ open class BaseViewModel : ViewModel() {
     }
 
     fun setRefreshIconVisibility(show: Boolean) {
-        showRefreshIcon.value = show
+        RefreshData.value = show
     }
 
     fun onDestory() {

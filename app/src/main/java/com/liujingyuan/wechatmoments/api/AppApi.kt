@@ -1,6 +1,7 @@
 package com.liujingyuan.wechatmoments.api
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.liujingyuan.wechatmoments.base.BaseResponse
 import com.liujingyuan.wechatmoments.model.User
 import retrofit2.http.GET
@@ -13,6 +14,6 @@ interface AppApi {
     @GET("user/{userId}")
     fun getUserInfo(
         @Path("userId") userId: String
-    ): LiveData<BaseResponse<User>>
+    ): LiveData<ApiResponse<User>>
 
 }
