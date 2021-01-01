@@ -3,13 +3,29 @@
     package="com.liujingyuan.wechatmoments">
     <uses-permission android:name="android.permission.INTERNET" />
     <application
+        android:maxAspectRatio="2.4"
+        android:resizeableActivity="true"
         android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@drawable/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.WeChatMoments">
+        android:theme="@style/NoTitleBar">
+
+        <!--适配华为（huawei）刘海屏-->
+        <meta-data
+            android:name="android.notch_support"
+            android:value="true"/>
+        <!--适配小米（xiaomi）刘海屏-->
+        <meta-data
+            android:name="notch.config"
+            android:value="portrait|landscape" />
+
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="2.4" />
+
         <activity android:name=".view.WeChatMomentActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

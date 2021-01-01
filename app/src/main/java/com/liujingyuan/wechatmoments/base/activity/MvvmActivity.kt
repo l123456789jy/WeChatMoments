@@ -11,6 +11,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.ViewModelProvider
+import com.gyf.immersionbar.ktx.immersionBar
+import com.liujingyuan.wechatmoments.R
+import com.liujingyuan.wechatmoments.databinding.ActivityMainBinding
 
 import com.liujingyuan.wechatmoments.viewmodel.base.BaseViewModel
 
@@ -19,17 +22,16 @@ import com.liujingyuan.wechatmoments.viewmodel.base.BaseViewModel
  * 使用了lifecycle的activity
  */
 abstract class MvvmActivity<V : BaseViewModel> : AppCompatActivity() {
-
     protected var mViewModel: V? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (isSetInnerLayoutFullScreen())
             setInnerLayoutFullScreen()
-        setContentView(providerLayoutId())
+        setContentView(providerLayoutView())
         getBundleData()
         initVm()
         initWidget()
+        fetchData()
         setObserver()
         subscribeUi()
     }
@@ -40,6 +42,10 @@ abstract class MvvmActivity<V : BaseViewModel> : AppCompatActivity() {
         }
     }
 
+    /**
+     * 获取数据
+     */
+    abstract fun fetchData()
 
     /**
      * 获取bundle传入的数据
@@ -94,7 +100,7 @@ abstract class MvvmActivity<V : BaseViewModel> : AppCompatActivity() {
     /**
      * 布局文件
      */
-    abstract fun providerLayoutId(): Int
+    abstract fun providerLayoutView(): View
 
     /**
      * 绑定viewmodel
@@ -165,23 +171,18 @@ abstract class MvvmActivity<V : BaseViewModel> : AppCompatActivity() {
     open fun isSetInnerLayoutFullScreen() = false
 
     open fun isSetFullScreen() = false
+
     /**c
      * 设置activity为沉浸模式
      */
-
     private fun setInnerLayoutFullScreen() {
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-            window.decorView.systemUiVisibility=View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-        }else {
-            window.apply {
-                decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                //改为透明黑，避免纯白色标题栏看不到时间等图标
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-                    statusBarColor = Color.parseColor("#20000000")
-                }
-            }
-            supportActionBar?.hide()
+        immersionBar {
+            statusBarDarkFont(true)
+            navigationBarDarkIcon(true)
+            transparentBar()
+            transparentNavigationBar()
+            transparentStatusBar()
+            fullScreen(true)
         }
     }
 
