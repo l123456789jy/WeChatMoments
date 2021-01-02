@@ -56,15 +56,16 @@
         app:four_gird_mode="false"
         app:spacing="@dimen/dp_4" />
 
-    <!--  <com.alanginger.moments.view.CommentsView
+      <androidx.recyclerview.widget.RecyclerView
           android:id="@+id/comments_view"
+          app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:layout_marginTop="4dp"
-          android:background="@mipmap/comment_bg"
-          android:padding="4dp"
+          android:background="@color/bg_gray"
+          android:padding="@dimen/dp_4"
           app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="@id/tv_tweet_name"
-          app:layout_constraintTop_toBottomOf="@id/layout_image" />-->
+          app:layout_constraintStart_toStartOf="@id/tv_moment_name"
+          app:layout_constraintTop_toBottomOf="@id/layout_image" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,7 +2,9 @@ package com.liujingyuan.wechatmoments.model.adapter
 
 
 import android.widget.ImageView
+import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.chad.library.adapter.base.module.LoadMoreModule
 import com.chad.library.adapter.base.provider.BaseItemProvider
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.liujingyuan.wechatmoments.R
@@ -12,7 +14,7 @@ import com.liujingyuan.wechatmoments.widget.ImageNineGridLayout
 /**
  * 朋友圈列表
  */
-class MultipleTypesItemProvider : BaseItemProvider<MomentEnty>() {
+class MultipleTypesItemProvider : BaseItemProvider<MomentEnty>(){
 
     companion object {
         const val IMAGE_TEX_TYPE = 1
@@ -37,6 +39,18 @@ class MultipleTypesItemProvider : BaseItemProvider<MomentEnty>() {
         helper.setText(R.id.tv_moment_content, item.content)
         helper.setText(R.id.tv_moment_name, item.sender.nick)
         helper.getView<ImageView>(R.id.iv_moment_avatar).load(item.sender.avatar)
+
+        item?.comments?.let {
+            if (it.size<=0){
+                helper.setGone(R.id.comments_view,true)
+                return
+            }
+            helper.setGone(R.id.comments_view,false)
+            var commentAdapter = CommentAdapter(R.layout.moment_comments_item, it)
+            helper.getView<RecyclerView>(R.id.comments_view).adapter=commentAdapter
+        }?: kotlin.run {
+            helper.setGone(R.id.comments_view,true)
+        }
 
     }
 

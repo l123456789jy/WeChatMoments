@@ -1,13 +1,14 @@
 package com.liujingyuan.wechatmoments.model.adapter
 
 import com.chad.library.adapter.base.BaseProviderMultiAdapter
+import com.chad.library.adapter.base.module.LoadMoreModule
 import com.liujingyuan.wechatmoments.model.MomentEnty
 
 /**
  * 多条目类型数据隔离的适配器,类似于 ConcatAdapter
  *  为了方便以后列表的多类型扩展因此使用 BaseProviderMultiAdapter
  */
-class MomentAdapter : BaseProviderMultiAdapter<MomentEnty>() {
+class MomentAdapter : BaseProviderMultiAdapter<MomentEnty>(), LoadMoreModule {
     init {
         addItemProvider(MultipleTypesItemProvider())
         addItemProvider(EmptyItemProvider())
