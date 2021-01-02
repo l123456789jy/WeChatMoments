@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cl_moment"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:padding="@dimen/dp_16">
+
+    <ImageView
+        android:id="@+id/iv_moment_avatar"
+        android:layout_width="@dimen/dp_40"
+        android:layout_height="@dimen/dp_40"
+        android:background="@color/bg_gray"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_moment_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:ellipsize="end"
+        android:includeFontPadding="false"
+        android:lines="1"
+        android:textSize="14dp"
+        app:layout_constraintStart_toEndOf="@id/iv_moment_avatar"
+        app:layout_constraintTop_toTopOf="@id/iv_moment_avatar"
+        tools:text="我是昵称" />
+
+    <TextView
+        android:id="@+id/tv_moment_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:includeFontPadding="false"
+        android:textSize="@dimen/sp_14"
+        app:layout_constraintStart_toStartOf="@id/tv_moment_name"
+        app:layout_constraintTop_toBottomOf="@id/tv_moment_name"
+        tools:text="我是内容。。/。。。。。。。。。。" />
+
+
+    <com.liujingyuan.wechatmoments.widget.ImageNineGridLayout
+        android:id="@+id/layout_image"
+        android:visibility="gone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/tv_moment_name"
+        app:layout_constraintTop_toBottomOf="@id/tv_moment_content"
+        app:single_mode_height="@dimen/dp_180"
+        app:single_mode_width="@dimen/dp_300"
+        app:four_gird_mode="false"
+        app:spacing="@dimen/dp_4" />
+
+    <!--  <com.alanginger.moments.view.CommentsView
+          android:id="@+id/comments_view"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="4dp"
+          android:background="@mipmap/comment_bg"
+          android:padding="4dp"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="@id/tv_tweet_name"
+          app:layout_constraintTop_toBottomOf="@id/layout_image" />-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>

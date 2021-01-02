@@ -3,7 +3,7 @@ package com.liujingyuan.wechatmoments.http
 import android.util.Log
 import com.liujingyuan.wechatmoments.Constants.Companion.BASE_URL
 import com.liujingyuan.wechatmoments.api.AppApi
-import com.liujingyuan.wechatmoments.model.LiveDataCallAdapterFactory
+import com.liujingyuan.wechatmoments.model.adapter.LiveDataCallAdapterFactory
 import com.liujingyuan.wechatmoments.utiles.HttpsCerUtils
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

@@ -1,22 +1,21 @@
 package com.liujingyuan.wechatmoments.view
 
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import coil.load
+import com.liujingyuan.wechatmoments.Constants.Companion.USER_ID
 import com.liujingyuan.wechatmoments.R
 import com.liujingyuan.wechatmoments.base.activity.BaseActivity
 import com.liujingyuan.wechatmoments.databinding.ActivityMainBinding
 import com.liujingyuan.wechatmoments.model.MomentEnty
 import com.liujingyuan.wechatmoments.model.adapter.MomentAdapter
 import com.liujingyuan.wechatmoments.viewmodel.WeChatViewModel
+
 
 /**
  *main
@@ -49,17 +48,25 @@ class WeChatMomentActivity : BaseActivity<WeChatViewModel>() {
             Color.RED
         );
         mBinding.sw.setOnRefreshListener {
-
+            fetchData()
         }
+        mBinding.sw.post(Runnable { mBinding.sw.isRefreshing = true })
     }
 
 
     override fun fetchData() {
-        var momentAdapter = MomentAdapter(mutableListOf<MomentEnty>())
-        momentAdapter.addHeaderView(momentHead, 0)
+        var momentAdapter = MomentAdapter()
+        if (momentHead.parent != null) {
+            (momentHead.parent as ViewGroup).removeView(momentHead)
+        }
+        momentAdapter.setHeaderView(momentHead, 0)
         mBinding.momentRv.adapter = momentAdapter
-        var loadeUserInfo = mViewModel?.loadeUserInfo("jsmith")
-        loadeUserInfo?.observe(this, {
+        mViewModel?.loadeMomentListInfo(USER_ID)?.observe(this, {
+            refreshComplete()
+            momentAdapter.addData( it?.body as MutableList<MomentEnty>)
+        })
+        mViewModel?.loadeUserInfo(USER_ID)?.observe(this, {
+            refreshComplete()
             iv_moments_head.load(it?.body?.profileImage)
             iv_user_avatar.load(it?.body?.avatar)
             tv_user_name.text = it?.body?.nick
@@ -73,5 +80,10 @@ class WeChatMomentActivity : BaseActivity<WeChatViewModel>() {
     override fun subscribeUi() {
         super.subscribeUi()
     }
+
+    private fun refreshComplete() {
+        mBinding.sw.isRefreshing = false
+    }
+
 
 }

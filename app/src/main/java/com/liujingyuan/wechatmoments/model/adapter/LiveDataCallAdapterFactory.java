@@ -1,9 +1,9 @@
-package com.liujingyuan.wechatmoments.model;
+package com.liujingyuan.wechatmoments.model.adapter;
 
-import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 
 import com.liujingyuan.wechatmoments.api.ApiResponse;
+import com.liujingyuan.wechatmoments.model.adapter.LiveDataCallAdapter;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.ParameterizedType;

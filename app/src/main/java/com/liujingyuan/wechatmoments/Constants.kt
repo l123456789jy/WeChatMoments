@@ -5,6 +5,7 @@ package com.liujingyuan.wechatmoments
  */
 class Constants {
     companion object {
+        var USER_ID="jsmith"
         val BASE_URL = "http://thoughtworks-ios.herokuapp.com/"
     }
 }

@@ -18,7 +18,6 @@ public class MomentEnty {
 
     private String content;
     private SenderBean sender;
-    private String error;
     private List<ImagesBean> images;
     private List<CommentsBean> comments;
 
@@ -33,20 +32,9 @@ public class MomentEnty {
     public SenderBean getSender() {
         return sender;
     }
-
     public void setSender(SenderBean sender) {
         this.sender = sender;
     }
-
-    public String getError() {
-        return error;
-    }
-
-    public void setError(String error) {
-        this.error = error;
-    }
-
-
 
     public List<ImagesBean> getImages() {
         return images;

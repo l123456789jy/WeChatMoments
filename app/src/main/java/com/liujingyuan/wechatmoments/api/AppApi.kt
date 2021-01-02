@@ -3,6 +3,7 @@ package com.liujingyuan.wechatmoments.api
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.liujingyuan.wechatmoments.base.BaseResponse
+import com.liujingyuan.wechatmoments.model.MomentEnty
 import com.liujingyuan.wechatmoments.model.User
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -15,5 +16,11 @@ interface AppApi {
     fun getUserInfo(
         @Path("userId") userId: String
     ): LiveData<ApiResponse<User>>
+
+
+    @GET("user/{userId}/tweets")
+    fun loadeMomentListInfo(
+        @Path("userId") userId: String
+    ):LiveData<ApiResponse<List<MomentEnty>>>
 
 }
