@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.liujingyuan.wechatmoments.api.ApiResponse
+import com.liujingyuan.wechatmoments.extentions.limitPage
 import com.liujingyuan.wechatmoments.http.HttpManger
 import com.liujingyuan.wechatmoments.model.MomentEnty
 import com.liujingyuan.wechatmoments.model.User
@@ -37,18 +38,6 @@ class WeChatViewModel : BaseViewModel() {
         }
     }
 
-    /**
-     * list 分页
-     */
-    fun <T> limitPage(list: List<T>, page: Int, size: Int): List<T> {
-        return when {
-            list.size < page * size -> emptyList()
-            list.size >= page * size && list.size <= (page + 1) * size -> list.subList(
-                page * size,
-                list.size
-            )
-            else -> list.subList(page * size, (page + 1) * size)
-        }
-    }
+
 
 }
