@@ -183,6 +183,7 @@ abstract class MvvmActivity<V : BaseViewModel> : AppCompatActivity() {
             transparentNavigationBar()
             transparentStatusBar()
             fullScreen(true)
+            fitsSystemWindows(true)
         }
     }
 

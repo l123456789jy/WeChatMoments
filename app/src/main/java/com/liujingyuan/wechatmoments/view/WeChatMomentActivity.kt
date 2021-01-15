@@ -1,5 +1,6 @@
 package com.liujingyuan.wechatmoments.view
 
+import android.animation.ArgbEvaluator
 import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
@@ -7,7 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.chad.library.adapter.base.listener.OnLoadMoreListener
 import com.liujingyuan.wechatmoments.Constants.Companion.USER_ID
@@ -56,7 +59,30 @@ class WeChatMomentActivity : BaseActivity<WeChatViewModel>(), OnLoadMoreListener
             fetchData()
         }
         mBinding.sw.post { mBinding.sw.isRefreshing = true }
+        mBinding.momentRv.addOnScrollListener(object :RecyclerView.OnScrollListener(){
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                //不是静止的时候
+                if (recyclerView.scrollState != RecyclerView.SCROLL_STATE_IDLE) {
+                    val offset = recyclerView.computeVerticalScrollOffset()
+                    changeTopBackgroundColor(offset)
+                }
+            }
+        })
     }
+
+    private fun changeTopBackgroundColor(distance: Int) {
+        val maxDistance = resources.getDimensionPixelOffset(R.dimen.dp_250)
+        val percent = distance.toDouble() / maxDistance
+        if (percent > 1) {
+            return
+        }
+        val argbEvaluator = ArgbEvaluator()
+        val COLOR_START = argbEvaluator.evaluate(percent.toFloat(),
+            ContextCompat.getColor(this,android.R.color.transparent), ContextCompat.getColor(this,android.R.color.darker_gray)) as Int
+        mBinding.rlTitleBg.setBackgroundColor(COLOR_START)
+    }
+
 
 
     override fun fetchData() {

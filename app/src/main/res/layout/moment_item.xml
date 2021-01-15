@@ -44,28 +44,40 @@
 
     <com.liujingyuan.wechatmoments.widget.ImageNineGridLayout
         android:id="@+id/layout_image"
-        android:visibility="gone"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_4"
+        android:visibility="gone"
+        app:four_gird_mode="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/tv_moment_name"
         app:layout_constraintTop_toBottomOf="@id/tv_moment_content"
         app:single_mode_height="@dimen/dp_180"
         app:single_mode_width="@dimen/dp_300"
-        app:four_gird_mode="false"
         app:spacing="@dimen/dp_4" />
 
-      <androidx.recyclerview.widget.RecyclerView
-          android:id="@+id/comments_view"
-          app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          android:layout_marginTop="4dp"
-          android:background="@color/bg_gray"
-          android:padding="@dimen/dp_4"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="@id/tv_moment_name"
-          app:layout_constraintTop_toBottomOf="@id/layout_image" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_grid"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/tv_moment_name"
+        app:layout_constraintTop_toBottomOf="@id/tv_moment_content">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/comments_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:background="@color/bg_gray"
+        android:padding="@dimen/dp_4"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/tv_moment_name"
+        app:layout_constraintTop_toBottomOf="@id/layout_image" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -24,6 +24,9 @@ class WeChatViewModel : BaseViewModel() {
 
     fun loadeMomentListInfo(userId: String): LiveData<ApiResponse<List<MomentEnty>>> {
         twitterList = HttpManger.httpApi.loadeMomentListInfo(userId)
+      /*  twitterList.value!!.body!!.filterNot {
+            it.images.size>0&& it.content.isNotEmpty()
+        }*/
         return twitterList
     }
 
@@ -31,9 +34,12 @@ class WeChatViewModel : BaseViewModel() {
         Log.e("getMomentPagingData", page.toString())
         viewModelScope.launch {
             if (::twitterList.isInitialized) {
-                var pageData = limitPage(twitterList?.value?.body as List<MomentEnty>  , page, 6)
-                delay(1000)
-                pagingData.postValue(pageData)
+                twitterList?.value?.body?.let {
+                    var pageData = limitPage(it as List<MomentEnty>  , page, 6)
+                    delay(1000)
+                    pagingData.postValue(pageData)
+                }
+
             }
         }
     }
